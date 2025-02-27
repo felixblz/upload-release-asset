@@ -31798,12 +31798,11 @@ async function run() {
   try {
     // Get authenticated GitHub client (Ocktokit): https://github.com/actions/toolkit/tree/master/packages/github#usage
     const gh = github.getOctokit(
-      core.getInput("github_token", { required: true }),
+      core.getInput("github-token", { required: true }),
     );
     const { owner, repo } = github.context.repo;
 
     // Get the inputs from the workflow file: https://github.com/actions/toolkit/tree/master/packages/core#inputsoutputs
-    const uploadUrl = core.getInput("upload_url", { required: true });
     const assetPath = core.getInput("asset_path", { required: true });
     const assetName = core.getInput("asset_name", { required: true });
     const assetContentType = core.getInput("asset_content_type", {
