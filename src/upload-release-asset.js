@@ -1,6 +1,6 @@
-const core = require("@actions/core");
-const github = require("@actions/github");
-const fs = require("fs");
+import * as core from "@actions/core";
+import * as github from "@actions/github";
+import { statSync, readFileSync } from "fs";
 
 async function run() {
   try {
@@ -19,7 +19,7 @@ async function run() {
     const release_id = core.getInput("release_id", { required: true });
 
     // Determine content-length for header to upload asset
-    const contentLength = (filePath) => fs.statSync(filePath).size;
+    const contentLength = (filePath) => statSync(filePath).size;
 
     // Setup headers for API call, see Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-upload-release-asset for more information
     const headers = {
@@ -36,7 +36,7 @@ async function run() {
       release_id,
       headers,
       name: assetName,
-      data: fs.readFileSync(assetPath),
+      data: readFileSync(assetPath),
     });
 
     // Get the browser_download_url for the uploaded release asset from the response
@@ -51,4 +51,4 @@ async function run() {
   }
 }
 
-module.exports = run;
+export { run };

@@ -2,13 +2,14 @@
   "name": "upload-release-asset",
   "version": "1.0.0",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "description": "Upload a release asset to an existing GitHub Release",
   "main": "dist/index.js",
   "scripts": {
     "prettier": "npx prettier . --write",
     "prettier:check": "npx prettier . --check",
-    "build": "npm run prettier && ncc build src/main.js --license licenses.txt",
+    "build": "npm run prettier && npm run build:only",
+    "build:only": "ncc build src/main.js --license licenses.txt",
     "precommit": "npm run build && git add dist/"
   },
   "repository": {
@@ -18,11 +19,11 @@
   "author": "felixblz",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0"
+    "@actions/core": "^3.0.1",
+    "@actions/github": "^9.1.1"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.38.3",
-    "prettier": "^3.5.3"
+    "@vercel/ncc": "^0.45.0",
+    "prettier": "^3.9.6"
   }
 }

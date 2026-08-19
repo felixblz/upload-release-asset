@@ -1,3 +1,3 @@
-const run = require("./upload-release-asset");
+import { run } from "./upload-release-asset";
 
-run();
+await run();
